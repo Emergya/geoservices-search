@@ -2,3 +2,7 @@
 *.orig
 /target/*
 /nb-configuration.xml
+/geoservices-search-ws/target/
+/geoservices-search-roads/target/
+/geoservices-search-wsdl/target/
+/geoservices-search-pois/target/
