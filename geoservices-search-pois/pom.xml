@@ -9,6 +9,20 @@
     <artifactId>geoservices-search-pois</artifactId>
     <name>GeoServices: Search in POIs</name>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-context</artifactId>
+            <version>4.0.6.RELEASE</version>
+            <type>jar</type>
+        </dependency>
+        <dependency>
+            <groupId>com.emergya.geoservices</groupId>
+            <artifactId>geoservices-search-wsdl</artifactId>
+            <version>0.1</version>
+            <type>jar</type>
+        </dependency>
+    </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <maven.compiler.source>1.7</maven.compiler.source>
