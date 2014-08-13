@@ -1,7 +1,6 @@
 
 package com.emergya.geoservices.search.roads;
 
-import com.emergya.geoservices.search.wsdl.CercaCarreteres;
 import com.emergya.geoservices.search.wsdl.RoadResponse;
 
 /**
@@ -10,6 +9,8 @@ import com.emergya.geoservices.search.wsdl.RoadResponse;
  */
 public interface RoadSearcher {
     
-    RoadResponse searchRoad(CercaCarreteres search);
+    public RoadResponse searchRoad(String query, String entitats, Integer filaInicial, Integer filaFinal);
+
+    public RoadResponse searchRoad(String query);
     
 }
