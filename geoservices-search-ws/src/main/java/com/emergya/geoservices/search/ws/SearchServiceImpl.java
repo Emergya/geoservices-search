@@ -1,7 +1,10 @@
 package com.emergya.geoservices.search.ws;
 
+import com.emergya.geoservices.search.pois.POISearcher;
 import com.emergya.geoservices.search.roads.RoadSearcher;
 import com.emergya.geoservices.search.wsdl.CercaCarreteres;
+import com.emergya.geoservices.search.wsdl.CercaSolrGeneral;
+import com.emergya.geoservices.search.wsdl.CercaSolrParametritzada;
 import com.emergya.geoservices.search.wsdl.Response;
 import com.emergya.geoservices.search.wsdl.RoadResponse;
 import com.emergya.geoservices.search.wsdl.SearchService;
@@ -22,11 +25,16 @@ public class SearchServiceImpl implements SearchService{
     
     @Autowired
     RoadSearcher roadSearcher;
+    
+    @Autowired
+    POISearcher poiSearcher;
 
     @Override
     public SolrResponse cercaSolrGeneral(
             @WebParam(name = "query", targetNamespace = "") String query) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        return poiSearcher.searchPOIs(query);
+        
     }
 
     @Override
@@ -35,7 +43,7 @@ public class SearchServiceImpl implements SearchService{
             @WebParam(name = "entitats", targetNamespace = "") String entitats,
             @WebParam(name = "filaInicial", targetNamespace = "") Integer filaInicial,
             @WebParam(name = "filaFinal", targetNamespace = "") Integer filaFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return poiSearcher.searchPOIs(query, entitats, filaInicial, filaFinal);
     }
 
     @Override
@@ -44,7 +52,11 @@ public class SearchServiceImpl implements SearchService{
             @WebParam(name = "entitats", targetNamespace = "") String entitats,
             @WebParam(name = "filaInicial", targetNamespace = "") Integer filaInicial,
             @WebParam(name = "filaFinal", targetNamespace = "") Integer filaFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+       
+        Response response = new Response();
+        response.setRoadResponse(roadSearcher.searchRoad(query,entitats, filaInicial, filaFinal));
+        response.setSolrResponse(poiSearcher.searchPOIs(query, entitats, filaInicial, filaFinal));
+        return response;
     }
 
     @Override
@@ -52,16 +64,18 @@ public class SearchServiceImpl implements SearchService{
             @WebParam(name = "query", targetNamespace = "") String query,
             @WebParam(name = "filaInicial", targetNamespace = "") Integer filaInicial,
             @WebParam(name = "filaFinal", targetNamespace = "") Integer filaFinal) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Response response = new Response();
+        response.setRoadResponse(roadSearcher.searchRoad(query,null, filaInicial, filaFinal));
+        response.setSolrResponse(poiSearcher.searchPOIs(query, null, filaInicial, filaFinal));
+        
+        return response;
     }
 
     @Override
     public RoadResponse cercaCarreteres(
             @WebParam(name = "query", targetNamespace = "") String query) {
        
-        CercaCarreteres cercaCarreteres = new CercaCarreteres();
-        cercaCarreteres.setQuery(query);
-        return this.roadSearcher.searchRoad(cercaCarreteres);
+        return this.roadSearcher.searchRoad(query);
     }
 
 }
