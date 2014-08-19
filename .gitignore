@@ -6,3 +6,4 @@
 /geoservices-search-roads/target/
 /geoservices-search-wsdl/target/
 /geoservices-search-pois/target/
+/geoservices-search-pois-solr-config/data/*
