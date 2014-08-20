@@ -121,9 +121,13 @@
         <field name="typeF" type="string" indexed="true" stored="true" multiValued="false" />
         <field name="address" type="text_es" indexed="true" stored="true" multiValued="false" />
         <field name="addressF" type="string" indexed="true" stored="true" multiValued="false" />
-	<field name="localityCode" type="string" indexed="true" stored="true" multiValued="false" />
-	<field name="locality" type="text_es" indexed="true" stored="true" multiValued="false" />
-	<field name="localityF" type="string" indexed="true" stored="true" multiValued="false" />
+
+        <field name="localityCode" type="string" indexed="true" stored="true" multiValued="false" />
+        <field name="locality" type="text_es" indexed="true" stored="true" multiValued="false" />
+        <field name="localityF" type="string" indexed="true" stored="true" multiValued="false" />
+
+        <field name="utmX" type="double" indexed="true" stored="true" multiValued="false" />
+        <field name="utmY" type="double" indexed="true" stored="true" multiValued="false" />
 
         <dynamicField name="*" type="ignored" />
 

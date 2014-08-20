@@ -10,6 +10,6 @@ public interface POISearcher {
     
     public SolrResponse searchPOIs(String query);
 
-    public SolrResponse searchPOIs(String query, String entitats, Integer filaInicial, Integer filaFinal);
+    public SolrResponse searchPOIs(String query, String[] entitats, Integer filaInicial, Integer filaFinal);
     
 }

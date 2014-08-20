@@ -810,8 +810,7 @@
             <!-- En vez de incluir una clausula de boosting bf=recip(geodist(),1,1,1)^100000 incluimos un sort directo por cercania-->
             <!--str name="sort">
                 geodist() asc, score desc
-            </str-->
-            <!-- descomentar estas lineas para potenciar los resultados de ciertos origenes   
+            </str-->           
         </lst>
         <!-- In addition to defaults, "appends" params can be specified
          to identify values which should be appended to the list of
