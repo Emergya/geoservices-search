@@ -1,5 +1,6 @@
 *~
 *.orig
+.*
 /target/*
 /nb-configuration.xml
 /geoservices-search-ws/target/

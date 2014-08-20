@@ -51,7 +51,7 @@ public class SearchServiceImpl implements SearchService {
             @WebParam(name = "filaFinal", targetNamespace = "") Integer filaFinal) {
 
         Response response = new Response();
-        response.setRoadResponse(roadSearcher.searchRoad(query, entitats, filaInicial, filaFinal));
+        response.setRoadResponse(roadSearcher.searchRoad(query));
         response.setSolrResponse(poiSearcher.searchPOIs(query, entitats, filaInicial, filaFinal));
         return response;
     }
@@ -62,7 +62,7 @@ public class SearchServiceImpl implements SearchService {
             @WebParam(name = "filaInicial", targetNamespace = "") Integer filaInicial,
             @WebParam(name = "filaFinal", targetNamespace = "") Integer filaFinal) {
         Response response = new Response();
-        response.setRoadResponse(roadSearcher.searchRoad(query, null, filaInicial, filaFinal));
+        response.setRoadResponse(roadSearcher.searchRoad(query));
         response.setSolrResponse(poiSearcher.searchPOIs(query, null, filaInicial, filaFinal));
 
         return response;

@@ -8,5 +8,5 @@ import java.util.List;
  * @author lroman
  */
 public interface PkDao {
-    public List<RoadPk> searchPK(String roadName, int desiredPK, int firstRow, int lastRow);
+    public List<RoadPk> searchPK(String roadName, int desiredPK);
 }

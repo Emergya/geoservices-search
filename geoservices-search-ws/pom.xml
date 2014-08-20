@@ -90,8 +90,7 @@
             <groupId>ojdbc</groupId>
             <artifactId>ojdbc</artifactId>
             <version>14</version>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/ojdbc6.jar</systemPath>
+            <scope>provided</scope>
         </dependency>
         
       

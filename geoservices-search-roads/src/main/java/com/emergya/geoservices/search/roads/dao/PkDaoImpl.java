@@ -24,7 +24,7 @@ public class PkDaoImpl  extends JdbcBaseDao implements PkDao {
 
 
     @Override
-    public List<RoadPk> searchPK(String roadName, int desiredPk, int firstRow, int lastRow) {
+    public List<RoadPk> searchPK(String roadName, int desiredPk) {
         
         // Using String.format is not a good approach but using the JdbcTemplate's provided way resulted in
         // 'invalid column type' errors. :(
