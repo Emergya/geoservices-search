@@ -10,6 +10,7 @@ import javax.ejb.Stateless;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 /**
  * Implementation for the WS interface for the search geoservices.
@@ -40,7 +41,7 @@ public class SearchServiceImpl implements SearchService {
             @WebParam(name = "entitats", targetNamespace = "") String entitats,
             @WebParam(name = "filaInicial", targetNamespace = "") Integer filaInicial,
             @WebParam(name = "filaFinal", targetNamespace = "") Integer filaFinal) {
-        return poiSearcher.searchPOIs(query, entitats, filaInicial, filaFinal);
+        return poiSearcher.searchPOIs(query, StringUtils.commaDelimitedListToStringArray(entitats), filaInicial, filaFinal);
     }
 
     @Override
@@ -51,8 +52,9 @@ public class SearchServiceImpl implements SearchService {
             @WebParam(name = "filaFinal", targetNamespace = "") Integer filaFinal) {
 
         Response response = new Response();
+        String[] entitatsA = StringUtils.commaDelimitedListToStringArray(entitats);
         response.setRoadResponse(roadSearcher.searchRoad(query));
-        response.setSolrResponse(poiSearcher.searchPOIs(query, entitats, filaInicial, filaFinal));
+        response.setSolrResponse(poiSearcher.searchPOIs(query, entitatsA, filaInicial, filaFinal));
         return response;
     }
 

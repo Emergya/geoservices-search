@@ -11,8 +11,6 @@ import org.antlr.v4.runtime.RecognitionException;
 import org.antlr.v4.runtime.Recognizer;
 import org.junit.Test;
 
-import com.emergya.geoservices.search.antlr4.PKParser.PkContext;
-import com.sun.istack.NotNull;
 
 public class PKTest {
 
