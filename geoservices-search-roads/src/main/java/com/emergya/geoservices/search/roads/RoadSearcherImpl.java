@@ -30,17 +30,18 @@ public class RoadSearcherImpl implements RoadSearcher {
     private PkDao pkSearchDAO;
 
     @Override
-    public RoadResponse searchRoad(String query) {
+    public RoadResponse searchRoad(final String query) {
     	
     	final AtomicReference<String> wayCode = new AtomicReference<>();
     	final AtomicReference<String> km = new AtomicReference<>();
+    	final String MISSING_NAME = "<missing Name>";
     	
     	PKLexer l = new PKLexer(new ANTLRInputStream(query));
     	PKParser p = new PKParser(new CommonTokenStream(l));
 	    p.addErrorListener(new BaseErrorListener() {
 	        @Override
 	        public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
-	            throw new IllegalStateException("failed to parse at line " + line + " due to " + msg, e);
+	           // Do anything
 	        }
 	    });
 	    p.addParseListener(new PKBaseListener(){
@@ -56,6 +57,9 @@ public class RoadSearcherImpl implements RoadSearcher {
 	    p.pk();
 	    
 	    String wayname = wayCode.get();
+	    if(MISSING_NAME.equals(wayname)){
+	    	wayname = query;
+	    }
 	    Integer pk_km = new Integer(0);
 	    if(km.get() != null){
 	    	pk_km = Integer.parseInt(km.get());
