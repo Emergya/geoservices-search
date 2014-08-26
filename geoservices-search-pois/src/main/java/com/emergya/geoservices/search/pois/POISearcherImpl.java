@@ -35,7 +35,7 @@ public class POISearcherImpl implements POISearcher {
     public SolrResponse searchPOIs(String query, String[] entitats, Integer filaInicial, Integer filaFinal) {
         SolrQuery solrQuery = new SolrQuery();
 
-        query = "\"" + query.trim() + "\"";
+        query =  query.trim();
 
         if (entitats != null && entitats.length > 0) {
             query = String.format("layer:(%s) %s", StringUtils.arrayToDelimitedString(StringUtils.trimArrayElements(entitats), " "), query);
@@ -64,8 +64,10 @@ public class POISearcherImpl implements POISearcher {
             solrResponseItem.setNom((String) doc.getFieldValue("name"));
             solrResponseItem.setMunicipi((String) doc.getFieldValue("locality"));
             solrResponseItem.setTipus((String) doc.getFieldValue("type"));
-            solrResponseItem.setEntitat((String) doc.getFirstValue("layer"));
-
+            solrResponseItem.setEntitat((String) doc.getFieldValue("layer"));
+            solrResponseItem.setUtmX((double) doc.getFieldValue("utmX"));
+            solrResponseItem.setUtmY((double) doc.getFieldValue("utmY"));
+   
             // TODO: retrieve coordinates!
             solrResponseItem.setScore((float) doc.getFieldValue("score"));
 
