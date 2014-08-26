@@ -170,7 +170,6 @@
     <!-- <copyField source="*_t" dest="text" maxChars="3000"/> -->
     <copyField source="locality" dest="localityF" />
     <copyField source="type" dest="typeF" />
-    <copyField source="*" dest="text" />
     <!-- copy name to alphaNameSort, a field designed for sorting by name -->
     <!-- <copyField source="name" dest="alphaNameSort"/> -->
 
