@@ -28,20 +28,22 @@ public class RoadSearcherImpl implements RoadSearcher {
 
     @Autowired
     private PkDao pkSearchDAO;
+    
+    private final static String MISSING_NAME = "<missing Name>";
 
     @Override
     public RoadResponse searchRoad(final String query) {
     	
     	final AtomicReference<String> wayCode = new AtomicReference<>();
     	final AtomicReference<String> km = new AtomicReference<>();
-    	final String MISSING_NAME = "<missing Name>";
+    	
     	
     	PKLexer l = new PKLexer(new ANTLRInputStream(query));
     	PKParser p = new PKParser(new CommonTokenStream(l));
 	    p.addErrorListener(new BaseErrorListener() {
 	        @Override
 	        public void syntaxError(Recognizer<?, ?> recognizer, Object offendingSymbol, int line, int charPositionInLine, String msg, RecognitionException e) {
-	           // Do anything
+	           // Do nothing
 	        }
 	    });
 	    p.addParseListener(new PKBaseListener(){
@@ -60,7 +62,7 @@ public class RoadSearcherImpl implements RoadSearcher {
 	    if(MISSING_NAME.equals(wayname)){
 	    	wayname = query;
 	    }
-	    Integer pk_km = new Integer(0);
+	    Integer pk_km = 0;
 	    if(km.get() != null){
 	    	pk_km = Integer.parseInt(km.get());
 	    }
