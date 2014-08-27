@@ -24,9 +24,9 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     
     <!-- Oracle data source -->
     <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
-        <property name="uRL" value="${oracle.url}"/>        
-        <property name="user" value="${oracle.usr}"/>
-        <property name="password" value="${oracle.pwd}"/>
+        <property name="uRL" value="${geoservices.search.roads.oracle.url}"/>        
+        <property name="user" value="${geoservices.search.roads.oracle.usr}"/>
+        <property name="password" value="${geoservices.search.roads.oracle.pwd}"/>
     </bean>
     
     <context:property-placeholder location="classpath:app.properties"/>
