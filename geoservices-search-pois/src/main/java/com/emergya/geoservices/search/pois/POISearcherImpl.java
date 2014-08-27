@@ -12,6 +12,7 @@ import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
 import org.apache.solr.common.params.SolrParams;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
@@ -22,9 +23,10 @@ import org.springframework.util.StringUtils;
 @Service
 public class POISearcherImpl implements POISearcher {
 
-    String solrUrl = "http://localhost:8983/solr/poi-search";
-
-    SolrServer solrServer;
+    @Value("${geoservices.search.pois.solrUrl}")
+    private String SOLR_URL;
+;
+    private SolrServer solrServer;
 
     @Override
     public SolrResponse searchPOIs(String query) {
@@ -32,17 +34,19 @@ public class POISearcherImpl implements POISearcher {
     }
 
     @Override
-    public SolrResponse searchPOIs(String query, String[] entitats, Integer filaInicial, Integer filaFinal) {
+    public SolrResponse searchPOIs(String query, String[] layers, Integer firstRow, Integer lastRow) {
         SolrQuery solrQuery = new SolrQuery();
 
         query =  query.trim();
 
-        if (entitats != null && entitats.length > 0) {
-            query = String.format("layer:(%s) %s", StringUtils.arrayToDelimitedString(StringUtils.trimArrayElements(entitats), " "), query);
+        if (layers != null && layers.length > 0) {
+            query = String.format("layer:(%s) %s", StringUtils.arrayToDelimitedString(StringUtils.trimArrayElements(layers), " "), query);
             solrQuery.addFacetField("layer");
         }
 
         solrQuery.set("q", query);
+        solrQuery.set("start", firstRow);
+        solrQuery.set("rows", lastRow - firstRow +1);
 
         QueryResponse solrResult;
         try {
@@ -79,7 +83,7 @@ public class POISearcherImpl implements POISearcher {
 
     private SolrServer getSolrServer() {
         if (this.solrServer == null) {
-            this.solrServer = new HttpSolrServer(solrUrl);
+            this.solrServer = new HttpSolrServer(SOLR_URL);
         }
 
         return this.solrServer;
