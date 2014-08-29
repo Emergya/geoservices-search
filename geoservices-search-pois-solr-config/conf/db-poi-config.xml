@@ -217,7 +217,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="transhubs" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'TransHubs' LAYER, v.x X, v.y Y FROM TRANSHUBS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="transhubs" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'TransHubs' LAYER, v.x X, v.y Y FROM TRANSHUBS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE AND poi.POI_LANGCD ='SPA'"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
