@@ -37,122 +37,193 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="entertn" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'ENTERTN' LAYER, v.x X, v.y Y FROM ENTERTN poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="entertn" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY,'ENTERTN' LAYER, v.x X, v.y Y FROM ENTERTN poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="travdest" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'TRAVDEST' LAYER, v.x X, v.y Y FROM TRAVDEST poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="travdest" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY,'TRAVDEST' LAYER, v.x X, v.y Y FROM TRAVDEST poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="autosvc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'AUTOSVC' LAYER, v.x X, v.y Y FROM AUTOSVC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="autosvc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'AUTOSVC' LAYER, v.x X, v.y Y FROM AUTOSVC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="business" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'BUSINESS' LAYER, v.x X, v.y Y FROM BUSINESS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="business" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'BUSINESS' LAYER, v.x X, v.y Y FROM BUSINESS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="commsvc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'COMMSVC' LAYER, v.x X, v.y Y FROM COMMSVC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="commsvc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'COMMSVC' LAYER, v.x X, v.y Y FROM COMMSVC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="eduinsts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'EDUINSTS' LAYER, v.x X, v.y Y FROM EDUINSTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="eduinsts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'EDUINSTS' LAYER, v.x X, v.y Y FROM EDUINSTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="fininsts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'FININSTS' LAYER, v.x X, v.y Y FROM FININSTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="fininsts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'FININSTS' LAYER, v.x X, v.y Y FROM FININSTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="hamlet" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'HAMLET' LAYER, v.x X, v.y Y FROM HAMLET poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="hamlet" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'HAMLET' LAYER, v.x X, v.y Y FROM HAMLET poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="hospital" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'HOSPITAL' LAYER, v.x X, v.y Y FROM HOSPITAL poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="hospital" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'HOSPITAL' LAYER, v.x X, v.y Y FROM HOSPITAL poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="misccategories" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'MISCCATEGORIES' LAYER, v.x X, v.y Y FROM MISCCATEGORIES poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="misccategories" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'MISCCATEGORIES' LAYER, v.x X, v.y Y FROM MISCCATEGORIES poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="namedplc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, 'NAMEDPLC' LAYER, v.x X, v.y Y FROM NAMEDPLC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="namedplc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'NAMEDPLC' LAYER, v.x X, v.y Y FROM NAMEDPLC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
 			<field column="TYPE" name="type" />
 			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="parkrec" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'PARKREC' LAYER, v.x X, v.y Y FROM PARKREC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="parking" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'PARKING' LAYER, v.x X, v.y Y FROM PARKING poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="restrnts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'Restrnts' LAYER, v.x X, v.y Y FROM RESTRNTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="shopping" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'Shopping' LAYER, v.x X, v.y Y FROM SHOPPING poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="transhubs" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'TransHubs' LAYER, v.x X, v.y Y FROM TRANSHUBS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
 			<field column="LAYER" name="layer" />
 			<field column="X" name="utmX" />
 			<field column="Y" name="utmY" />
