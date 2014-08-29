@@ -19,7 +19,7 @@
         <dependency>
             <groupId>com.emergya.geoservices</groupId>
             <artifactId>geoservices-search-wsdl</artifactId>
-            <version>0.1</version>
+            <version>${project.parent.version}</version>
             <type>jar</type>
         </dependency>
          <dependency>
