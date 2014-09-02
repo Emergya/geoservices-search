@@ -10,7 +10,7 @@
     </servlet>
     <servlet-mapping>
         <servlet-name>jaxws-servlet</servlet-name>
-        <url-pattern>/SearchService</url-pattern>
+        <url-pattern>/search</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

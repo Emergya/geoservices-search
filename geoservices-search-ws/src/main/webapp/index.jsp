@@ -8,6 +8,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <jsp:forward page="SearchService"></jsp:forward>
+        <jsp:forward page="search"></jsp:forward>
     </body>
 </html>

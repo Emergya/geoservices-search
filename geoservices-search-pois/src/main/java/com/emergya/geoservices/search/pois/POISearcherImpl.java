@@ -45,9 +45,10 @@ public class POISearcherImpl implements POISearcher {
         }
 
         solrQuery.set("q", query);
-        solrQuery.set("start", firstRow);
-        solrQuery.set("rows", lastRow - firstRow +1);
-
+        if(firstRow != null && lastRow != null){
+        	solrQuery.set("start", firstRow);
+        	solrQuery.set("rows", lastRow - firstRow +1);
+        }
         QueryResponse solrResult;
         try {
             solrResult = this.getSolrServer().query(solrQuery);

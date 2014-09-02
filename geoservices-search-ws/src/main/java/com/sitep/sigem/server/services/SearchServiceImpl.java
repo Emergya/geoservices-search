@@ -1,4 +1,4 @@
-package com.emergya.geoservices.search.ws;
+package com.sitep.sigem.server.services;
 
 import com.emergya.geoservices.search.pois.POISearcher;
 import com.emergya.geoservices.search.roads.RoadSearcher;
@@ -9,6 +9,8 @@ import com.emergya.geoservices.search.wsdl.SolrResponse;
 import javax.ejb.Stateless;
 import javax.jws.WebParam;
 import javax.jws.WebService;
+import javax.xml.ws.RequestWrapper;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.util.StringUtils;
 
@@ -17,7 +19,7 @@ import org.springframework.util.StringUtils;
  *
  * @author lroman
  */
-@WebService(serviceName = "SearchService")
+@WebService(serviceName = "search")
 @Stateless()
 public class SearchServiceImpl implements SearchService {
 
