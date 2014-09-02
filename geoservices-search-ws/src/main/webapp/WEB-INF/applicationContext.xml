@@ -12,15 +12,15 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
     <context:annotation-config/>
     <context:component-scan base-package="com.emergya.geoservices.search"/>
     
-    <wss:binding url="/SearchService">
+    <wss:binding url="/search">
         <wss:service>
-            <ws:service bean="#searchService" impl="com.emergya.geoservices.search.ws.SearchServiceImpl"/>
+            <ws:service bean="#searchService" impl="com.sitep.sigem.server.services.SearchServiceImpl"/>
         </wss:service>
     </wss:binding>
 
  
     <!-- Web service bean -->
-    <bean id="searchService" class="com.emergya.geoservices.search.ws.SearchServiceImpl"/>
+    <bean id="searchService" class="com.sitep.sigem.server.services.SearchServiceImpl"/>
     
     <!-- Oracle data source -->
     <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
