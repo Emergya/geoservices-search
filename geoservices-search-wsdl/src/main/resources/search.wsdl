@@ -245,9 +245,9 @@
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="SearchServiceImpl">
+    <wsdl:service name="SearchServiceImplService">
         <wsdl:port binding="tns:SearchServiceImplSoapBinding" name="SearchServiceImplPort">
-            <soap:address location="http://search.geoservices.emergya.com" />
+            <soap:address location="http://sigescat.pise.interior.intranet/search" />
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
