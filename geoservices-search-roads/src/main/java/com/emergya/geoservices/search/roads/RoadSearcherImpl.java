@@ -15,6 +15,8 @@ import com.emergya.geoservices.search.antlr4.PKBaseListener;
 import com.emergya.geoservices.search.antlr4.PKLexer;
 import com.emergya.geoservices.search.antlr4.PKParser;
 import com.emergya.geoservices.search.roads.dao.PkDao;
+import com.emergya.geoservices.search.roads.dao.RoadDao;
+import com.emergya.geoservices.search.roads.dto.Road;
 import com.emergya.geoservices.search.roads.dto.RoadPk;
 import com.emergya.geoservices.search.wsdl.RoadResponse;
 import com.emergya.geoservices.search.wsdl.RoadResponseItem;
@@ -28,6 +30,9 @@ public class RoadSearcherImpl implements RoadSearcher {
 
     @Autowired
     private PkDao pkSearchDAO;
+    
+    @Autowired
+    private RoadDao roadSearchDao;
     
     private final static String MISSING_NAME = "<missing Name>";
 
@@ -62,23 +67,30 @@ public class RoadSearcherImpl implements RoadSearcher {
 	    if(MISSING_NAME.equals(wayname)){
 	    	wayname = query;
 	    }
-	    Integer pk_km = 0;
+	    
+	    RoadResponse response = new RoadResponse();
+	    Integer pk_km = null;
 	    if(km.get() != null){
 	    	pk_km = Integer.parseInt(km.get());
+	    	List<RoadPk> foundPks = pkSearchDAO.searchPK(wayname, pk_km);
+	        for (RoadPk pk : foundPks) {
+	            RoadResponseItem roadResponseItem = new RoadResponseItem();
+	            roadResponseItem.setId(pk.getObjectId());
+	            roadResponseItem.setNom(pk.getRoadName());
+	            roadResponseItem.setValor((double)pk.getPk());
+	            roadResponseItem.setEntitat("y");
+	            response.getLst().add(roadResponseItem);
+	        }
+	    }else{
+	    	List<Road> foundRoads = roadSearchDao.searchRoad(wayname);
+	    	for(Road r: foundRoads){
+	    		RoadResponseItem roadResponseItem = new RoadResponseItem();
+	            roadResponseItem.setId(r.getObjectId());
+	            roadResponseItem.setNom(r.getRoadName());
+	            roadResponseItem.setEntitat("x");
+	            response.getLst().add(roadResponseItem);
+	    	}
 	    }
-	    
-        List<RoadPk> foundPks = pkSearchDAO.searchPK(wayname, pk_km);
-
-        RoadResponse response = new RoadResponse();
-
-        for (RoadPk pk : foundPks) {
-            RoadResponseItem roadResponseItem = new RoadResponseItem();
-            roadResponseItem.setId(pk.getObjectId());
-            roadResponseItem.setNom(pk.getRoadName());
-            roadResponseItem.setValor((double)pk.getPk());
-            
-            response.getLst().add(roadResponseItem);
-        }
 
         return response;
     }
