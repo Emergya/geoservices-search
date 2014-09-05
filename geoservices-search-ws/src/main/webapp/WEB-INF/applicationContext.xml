@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-       xmlns:ws="http://jax-ws.dev.java.net/spring/core"
-       xmlns:wss="http://jax-ws.dev.java.net/spring/servlet"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ws="http://jax-ws.dev.java.net/spring/core"
+	xmlns:wss="http://jax-ws.dev.java.net/spring/servlet" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
 http://jax-ws.dev.java.net/spring/core http://jax-ws.java.net/spring/core.xsd 
 http://jax-ws.dev.java.net/spring/servlet http://jax-ws.java.net/spring/servlet.xsd
 http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
 
-    <context:annotation-config/>
-    <context:component-scan base-package="com.emergya.geoservices.search"/>
-    
-    <wss:binding url="/search">
-        <wss:service>
-            <ws:service bean="#searchService" impl="com.sitep.sigem.server.services.SearchServiceImpl"/>
-        </wss:service>
-    </wss:binding>
+	<context:annotation-config />
+	<context:component-scan base-package="com.emergya.geoservices.search" />
 
- 
-    <!-- Web service bean -->
-    <bean id="searchService" class="com.sitep.sigem.server.services.SearchServiceImpl"/>
-    
-    <!-- Oracle data source -->
-    <bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource" destroy-method="close">
-        <property name="uRL" value="${geoservices.search.roads.oracle.url}"/>        
-        <property name="user" value="${geoservices.search.roads.oracle.usr}"/>
-        <property name="password" value="${geoservices.search.roads.oracle.pwd}"/>
-    </bean>
-    
-    <context:property-placeholder location="classpath:app.properties"/>
-    
+	<wss:binding url="/search">
+		<wss:service>
+			<ws:service bean="#searchService"
+				impl="com.sitep.sigem.server.services.SearchServiceImpl" />
+		</wss:service>
+	</wss:binding>
+
+
+	<!-- Web service bean -->
+	<bean id="searchService" class="com.sitep.sigem.server.services.SearchServiceImpl" />
+
+	<!-- Oracle data source -->
+	<!--<bean id="dataSource" class="oracle.jdbc.pool.OracleDataSource"
+		destroy-method="close">
+		<property name="url" value="${geoservices.search.roads.oracle.url}" />
+		<property name="user" value="${geoservices.search.roads.oracle.usr}" />
+		<property name="password" value="${geoservices.search.roads.oracle.pwd}" />
+	</bean>-->
+
+	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
+		<property name="jndiName">
+			<value>java:/comp/env/jdbc/Geoservices</value>
+		</property>
+	</bean>
+
+	<context:property-placeholder location="classpath:app.properties" />
+
 </beans>
