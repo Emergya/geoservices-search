@@ -1,4 +1,4 @@
-package com.emergya.geoservices.search.ws;
+package com.sitep.sigem.server.services;
 
 import com.emergya.geoservices.search.pois.POISearcher;
 import com.emergya.geoservices.search.roads.RoadSearcher;
@@ -17,7 +17,7 @@ import org.springframework.util.StringUtils;
  *
  * @author lroman
  */
-@WebService(serviceName = "SearchService")
+@WebService(serviceName = "SearchServiceImplService")
 @Stateless()
 public class SearchServiceImpl implements SearchService {
 

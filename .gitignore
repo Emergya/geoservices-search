@@ -8,3 +8,4 @@
 /geoservices-search-wsdl/target/
 /geoservices-search-pois/target/
 /geoservices-search-pois-solr-config/data/*
+/geoservices-search-pois-solr-config/conf/dataimport.properties

@@ -1,13 +1,13 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <wsdl:definitions name="SearchService" 
-                  targetNamespace="http://search.geoservices.emergya.com/" 
+                  targetNamespace="http://services.server.sigem.sitep.com/" 
                   xmlns:ns1="http://cxf.apache.org/bindings/xformat" 
-                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://search.geoservices.emergya.com/"
+                  xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tns="http://services.server.sigem.sitep.com/"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <wsdl:types>
         <xs:schema attributeFormDefault="unqualified" elementFormDefault="unqualified" 
-           targetNamespace="http://search.geoservices.emergya.com/" 
-           xmlns:tns="http://search.geoservices.emergya.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+           targetNamespace="http://services.server.sigem.sitep.com/" 
+           xmlns:tns="http://services.server.sigem.sitep.com/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
             <xs:element name="cerca" type="tns:cerca" />
             <xs:element name="cercaCarreteres" type="tns:cercaCarreteres" />
             <xs:element name="cercaCarreteresResponse" type="tns:cercaCarreteresResponse" />
@@ -245,9 +245,9 @@
             </wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
-    <wsdl:service name="SearchServiceImpl">
+    <wsdl:service name="SearchServiceImplService">
         <wsdl:port binding="tns:SearchServiceImplSoapBinding" name="SearchServiceImplPort">
-            <soap:address location="http://search.geoservices.emergya.com" />
+            <soap:address location="http://sigescat.pise.interior.intranet/search" />
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>
