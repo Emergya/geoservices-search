@@ -24,7 +24,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 <dataConfig>
 	<dataSource name="oracle_jdbc" driver="oracle.jdbc.driver.OracleDriver" url="jdbc:oracle:thin:@oracle-apps-11g:1521:geostelef" user="devel" password="emergya" batchSize="100" />
 	<document name="poi">
-		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'CARTO_PU' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD"
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'pap' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND (poi.ENTIDAD = 'ADMÓN. PÚBLICA' OR poi.ENTIDAD = 'AYUNTAMIENTO' OR poi.ENTIDAD = 'EMBAJADA')"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -37,7 +37,126 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="entertn" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY,'ENTERTN' LAYER, v.x X, v.y Y FROM ENTERTN poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'psa' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND (poi.ENTIDAD = 'AMBULATORIO' OR poi.ENTIDAD = 'HOSPITAL')"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'pas' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND poi.ENTIDAD = 'CENTRO CÍVICO'"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'pl' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND (poi.ENTIDAD = 'CENTRO COMERCIAL' OR poi.ENTIDAD = 'PARQUE ATRACCIONES' OR poi.ENTIDAD = 'PISTA DE GOLF' OR poi.ENTIDAD = 'POLÍGONO DEPORTIVO' OR poi.ENTIDAD = 'TEATRO' OR poi.ENTIDAD = 'VIDA NOCTURNA' OR poi.ENTIDAD = 'BOLERA' OR poi.ENTIDAD = 'ESTACIÓN DE ESQUÍ' OR poi.ENTIDAD = 'CINE')"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'ab' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND poi.ENTIDAD = 'COMISARÍA DE POLICÍA'"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'pb' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND (poi.ENTIDAD = 'EMPRESA' OR poi.ENTIDAD = 'NEG. ESPECIALIZADO')"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'pe' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND (poi.ENTIDAD = 'ESCUELA' OR poi.ENTIDAD = 'UNIVERSIDAD')"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'pm' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND (poi.ENTIDAD = 'ESTACIÓN' OR poi.ENTIDAD = 'EST. DE AUTOBUSES' OR poi.ENTIDAD = 'AEROPUERTO')"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'ef' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND poi.ENTIDAD = 'EST. DE FERROCARRIL'"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="carto_pu" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID * 1000 as ID, poi.TEXTO NAME, poi.ENTIDAD TYPE, poi.DIRECCION ADDRESS, poi.LOCALIDAD LOCALITY_CODE, mun.NAME LOCALITY, 'db' LAYER, v.x X, v.y Y FROM CARTO_PU poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, CODMUN mun WHERE poi.LOCALIDAD = mun.COD AND poi.ENTIDAD != 'EST. DE FERROCARRIL' AND poi.ENTIDAD != 'ESTACIÓN' AND poi.ENTIDAD != 'EST. DE AUTOBUSES' AND poi.ENTIDAD != 'AEROPUERTO' AND poi.ENTIDAD != 'ESCUELA' AND poi.ENTIDAD != 'UNIVERSIDAD' AND poi.ENTIDAD != 'EMPRESA' AND poi.ENTIDAD != 'NEG. ESPECIALIZADO' AND poi.ENTIDAD != 'COMISARÍA DE POLICÍA' AND poi.ENTIDAD != 'CENTRO COMERCIAL' AND poi.ENTIDAD != 'PARQUE ATRACCIONES' AND poi.ENTIDAD != 'PISTA DE GOLF' AND poi.ENTIDAD != 'POLÍGONO DEPORTIVO' AND poi.ENTIDAD != 'TEATRO' AND poi.ENTIDAD != 'CINE' AND poi.ENTIDAD != 'VIDA NOCTURNA' AND poi.ENTIDAD != 'BOLERA' AND poi.ENTIDAD != 'ESTACIÓN DE ESQUÍ' AND poi.ENTIDAD != 'CENTRO CÍVICO' AND poi.ENTIDAD != 'AMBULATORIO' AND poi.ENTIDAD != 'HOSPITAL' AND poi.ENTIDAD != 'ADMÓN. PÚBLICA' AND poi.ENTIDAD != 'AYUNTAMIENTO' AND poi.ENTIDAD != 'EMBAJADA'"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY_CODE" name="localityCode" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+
+
+		<entity name="entertn" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY,'pl' LAYER, v.x X, v.y Y FROM ENTERTN poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -49,7 +168,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="travdest" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY,'TRAVDEST' LAYER, v.x X, v.y Y FROM TRAVDEST poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="travdest" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY,'db' LAYER, v.x X, v.y Y FROM TRAVDEST poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -61,7 +180,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="autosvc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'AUTOSVC' LAYER, v.x X, v.y Y FROM AUTOSVC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="autosvc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'db' LAYER, v.x X, v.y Y FROM AUTOSVC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -73,7 +192,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="business" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'BUSINESS' LAYER, v.x X, v.y Y FROM BUSINESS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="business" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'pb' LAYER, v.x X, v.y Y FROM BUSINESS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -85,7 +204,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="commsvc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'COMMSVC' LAYER, v.x X, v.y Y FROM COMMSVC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="commsvc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'pap' LAYER, v.x X, v.y Y FROM COMMSVC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -97,7 +216,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="eduinsts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'EDUINSTS' LAYER, v.x X, v.y Y FROM EDUINSTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="eduinsts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'pe' LAYER, v.x X, v.y Y FROM EDUINSTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -109,7 +228,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="fininsts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'FININSTS' LAYER, v.x X, v.y Y FROM FININSTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="fininsts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'db' LAYER, v.x X, v.y Y FROM FININSTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -121,7 +240,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="hamlet" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'HAMLET' LAYER, v.x X, v.y Y FROM HAMLET poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="hamlet" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'db' LAYER, v.x X, v.y Y FROM HAMLET poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -133,7 +252,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="hospital" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'HOSPITAL' LAYER, v.x X, v.y Y FROM HOSPITAL poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="hospital" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'psa' LAYER, v.x X, v.y Y FROM HOSPITAL poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -145,7 +264,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="misccategories" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'MISCCATEGORIES' LAYER, v.x X, v.y Y FROM MISCCATEGORIES poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="misccategories" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'db' LAYER, v.x X, v.y Y FROM MISCCATEGORIES poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -157,7 +276,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="namedplc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'NAMEDPLC' LAYER, v.x X, v.y Y FROM NAMEDPLC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="namedplc" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'db' LAYER, v.x X, v.y Y FROM NAMEDPLC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -169,7 +288,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="parkrec" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'PARKREC' LAYER, v.x X, v.y Y FROM PARKREC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="parkrec" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'pl' LAYER, v.x X, v.y Y FROM PARKREC poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -181,7 +300,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="parking" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'PARKING' LAYER, v.x X, v.y Y FROM PARKING poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="parking" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'db' LAYER, v.x X, v.y Y FROM PARKING poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -193,7 +312,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="restrnts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'Restrnts' LAYER, v.x X, v.y Y FROM RESTRNTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="restrnts" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'db' LAYER, v.x X, v.y Y FROM RESTRNTS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -205,7 +324,7 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="shopping" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'Shopping' LAYER, v.x X, v.y Y FROM SHOPPING poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="shopping" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'db' LAYER, v.x X, v.y Y FROM SHOPPING poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
@@ -217,7 +336,19 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 			<field column="Y" name="utmY" />
 		</entity>
 
-		<entity name="transhubs" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'TransHubs' LAYER, v.x X, v.y Y FROM TRANSHUBS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
+		<entity name="transhubs" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'pm' LAYER, v.x X, v.y Y FROM TRANSHUBS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE AND poi.POI_LANGCD ='SPA' AND poi.FAC_TYPE != '4013'"
+		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
+			<field column="ID" name="id" />
+			<field column="NAME" name="name" />
+			<field column="TYPE" name="type" />
+			<field column="ADDRESS" name="address" />
+			<field column="LOCALITY" name="locality" />
+			<field column="LAYER" name="layer" />
+			<field column="X" name="utmX" />
+			<field column="Y" name="utmY" />
+		</entity>
+
+		<entity name="transhubs" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY, 'ef' LAYER, v.x X, v.y Y FROM TRANSHUBS poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE AND poi.POI_LANGCD ='SPA'  AND poi.FAC_TYPE = '4013'"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
 			<field column="NAME" name="name" />
