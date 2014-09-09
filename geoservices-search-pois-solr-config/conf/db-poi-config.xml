@@ -155,7 +155,6 @@ For more details refer to URL : http://wiki.apache.org/solr/DataImportHandler
 		</entity>
 
 
-
 		<entity name="entertn" pk="POI_ID" dataSource="oracle_jdbc" query="SELECT poi.POI_ID ID, poi.POI_NAME NAME, poi.ST_NAME ADDRESS, fac_type.TYPE_NAME TYPE, poi.POLYGON_NM LOCALITY,'pl' LAYER, v.x X, v.y Y FROM ENTERTN poi, TABLE(SDO_UTIL.GETVERTICES(poi.geometry)) v, FACTYPE fac_type WHERE poi.FAC_TYPE = fac_type.FAC_TYPE"
 		transformer="TemplateTransformer,DateFormatTransformer,RegexTransformer">
 			<field column="ID" name="id" />
