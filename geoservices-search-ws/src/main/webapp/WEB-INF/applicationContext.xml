@@ -31,7 +31,7 @@ http://www.springframework.org/schema/context http://www.springframework.org/sch
 
 	<bean id="dataSource" class="org.springframework.jndi.JndiObjectFactoryBean">
 		<property name="jndiName">
-			<value>java:/comp/env/jdbc/Geoservices</value>
+			<value>${geoservices.search.roads.oracleJndiName}</value>
 		</property>
 	</bean>
 
