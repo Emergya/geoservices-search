@@ -95,7 +95,7 @@
 	</dependencies>
 
 	<build>
-        <finalName>search</finalName>
+        <finalName>geoservices-search-ws</finalName>
         <filters>
             <filter>src/main/filters/${profile.properties}</filter>
         </filters>
@@ -113,9 +113,6 @@
 				<configuration>
 					<source>1.7</source>
 					<target>1.7</target>
-					<compilerArguments>
-						<endorseddirs>${endorsed.dir}</endorseddirs>
-					</compilerArguments>
 				</configuration>
 			</plugin>
 			<plugin>
