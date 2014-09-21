@@ -9,3 +9,4 @@
 **/.settings/
 /geoservices-search-pois-solr-config/data/
 /geoservices-search-pois-solr-config/conf/dataimport-devel.properties
+/geoservices-search-pois-solr-config/conf/dataimport-prod.properties
