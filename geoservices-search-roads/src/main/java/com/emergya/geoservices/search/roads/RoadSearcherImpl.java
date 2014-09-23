@@ -20,6 +20,7 @@ import com.emergya.geoservices.search.roads.dto.Road;
 import com.emergya.geoservices.search.roads.dto.RoadPk;
 import com.emergya.geoservices.search.wsdl.RoadResponse;
 import com.emergya.geoservices.search.wsdl.RoadResponseItem;
+import org.springframework.util.StringUtils;
 
 /**
  *
@@ -54,6 +55,10 @@ public class RoadSearcherImpl implements RoadSearcher {
 	    p.addParseListener(new PKBaseListener(){
 	    	@Override
 	    	public void exitItem(PKParser.ItemContext ctx){
+                if(ctx.waycode==null) {
+                    wayCode.set(MISSING_NAME);
+                    return;
+                }
 	    		wayCode.set(ctx.waycode.getText());
 	    	}
 	    	@Override
