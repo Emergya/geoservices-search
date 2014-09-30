@@ -17,7 +17,7 @@ import org.springframework.stereotype.Repository;
 public class PkDaoImpl  extends JdbcBaseDao implements PkDao {
     
     private static final PKDataMapper MAPPER = new PKDataMapper();
-    @Value("${geoservices.search.pois.pkdatabse}")
+    @Value("${geoservices.search.roads.pkdatabse}")
     private String PK_DATA_BASE;
 
     
