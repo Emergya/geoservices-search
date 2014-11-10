@@ -1,9 +1,9 @@
 package com.emergya.geoservices.search.pois;
 
-import com.emergya.geoservices.search.wsdl.SolrResponse;
-import com.emergya.geoservices.search.wsdl.SolrResponseItem;
+import java.io.UnsupportedEncodingException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrServer;
 import org.apache.solr.client.solrj.SolrServerException;
@@ -11,10 +11,12 @@ import org.apache.solr.client.solrj.impl.HttpSolrServer;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
-import org.apache.solr.common.params.SolrParams;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
+
+import com.emergya.geoservices.search.wsdl.SolrResponse;
+import com.emergya.geoservices.search.wsdl.SolrResponseItem;
 
 /**
  *
@@ -25,7 +27,9 @@ public class POISearcherImpl implements POISearcher {
 
     @Value("${geoservices.search.pois.solrUrl}")
     private String SOLR_URL;
-;
+    @Value("${geoservices.search.pois.charEncode}")
+    private String CHAR_ENCODE;
+
     private SolrServer solrServer;
 
     @Override
@@ -38,6 +42,14 @@ public class POISearcherImpl implements POISearcher {
         SolrQuery solrQuery = new SolrQuery();
 
         query =  query.trim();
+        
+        try {
+        	query = new String(query.getBytes(this.CHAR_ENCODE), "UTF-8");
+        	
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         if (layers != null && layers.length > 0) {
             query = String.format("layer:(%s) %s", StringUtils.arrayToDelimitedString(StringUtils.trimArrayElements(layers), " "), query);
